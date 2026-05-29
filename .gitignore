@@ -10,4 +10,4 @@ backend/node_modules
 frontend/build
 backend/build
 
-.DS_Store
+.DS_Store 

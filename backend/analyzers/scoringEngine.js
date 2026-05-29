@@ -82,46 +82,47 @@ const generateScore = (
 
   complexityData,
 
-  optimizationData,
-
   executionTime,
 
   memory
 
 ) => {
 
-  let score = 70;
+  let score = 100;
 
-  // COMPLEXITY
+  // TIME COMPLEXITY
 
-  if(complexityData.timeComplexity === "O(1)"){
-
-    score += 20;
-  }
-
-  else if(complexityData.timeComplexity === "O(n)"){
-
-    score += 15;
-  }
-
-  else if(complexityData.timeComplexity === "O(n log n)"){
-
-    score += 10;
-  }
-
-  else if(complexityData.timeComplexity === "O(n²)"){
+  if(complexityData.timeComplexity === "O(n)"){
 
     score -= 10;
   }
 
-  else if(complexityData.timeComplexity === "O(n³)"){
+  else if(
+    complexityData.timeComplexity === "O(n²)"
+  ){
 
-    score -= 20;
+    score -= 30;
   }
 
-  else if(complexityData.timeComplexity === "O(2ⁿ)"){
+  else if(
+    complexityData.timeComplexity === "O(n³)"
+  ){
 
-    score -= 15;
+    score -= 50;
+  }
+
+  else if(
+    complexityData.timeComplexity === "O(2ⁿ)"
+  ){
+
+    score -= 40;
+  }
+
+  // MEMORY
+
+  if(memory > 15000){
+
+    score -= 10;
   }
 
   // EXECUTION TIME
@@ -131,36 +132,7 @@ const generateScore = (
     score -= 10;
   }
 
-  // MEMORY
-
-  if(memory > 10000){
-
-    score -= 10;
-  }
-
-  // OPTIMIZATION
-
-  if(optimizationData.optimization === "Good"){
-
-    score += 10;
-  }
-
-  else if(optimizationData.optimization === "Average"){
-
-    score -= 5;
-  }
-
-  else if(optimizationData.optimization === "Poor"){
-
-    score -= 15;
-  }
-
-  // LIMITS
-
-  if(score > 95){
-
-    score = 95;
-  }
+  // LIMIT
 
   if(score < 20){
 

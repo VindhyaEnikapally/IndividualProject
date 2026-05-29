@@ -5,6 +5,8 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const codeRoutes = require("./routes/codeRoutes");
+const folderRoutes = require("./routes/folderRoutes");
+const savedCodeRoutes = require("./routes/savedCodeRoutes");
 
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/code", codeRoutes);
+app.use("/api/folders", folderRoutes);
+app.use("/api/codes", savedCodeRoutes);
 
 mongoose
   .connect(process.env.MONGO_URL)

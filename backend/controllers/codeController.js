@@ -3,13 +3,10 @@ const executeCode = require("../services/judgeService");
 const analyzeComplexity =
 require("../analyzers/complexityAnalyzer");
 
-const analyzeOptimization =
-require("../analyzers/optimizationAnalyzer");
-
 const generateScore =
 require("../analyzers/scoringEngine");
 
-// RUN ONLY
+// RUN CODE
 
 const runCode = async (req, res) => {
 
@@ -29,9 +26,11 @@ const runCode = async (req, res) => {
 
     res.status(200).json({
 
-      stdout: result.stdout || "",
+      stdout:
+      result.stdout || "",
 
-      stderr: result.stderr || "",
+      stderr:
+      result.stderr || "",
 
       compile_output:
       result.compile_output || "",
@@ -53,7 +52,8 @@ const runCode = async (req, res) => {
   }
 };
 
-// EVALUATE ONLY
+
+// EVALUATE CODE
 
 const evaluateCode = async (req, res) => {
 
@@ -73,61 +73,51 @@ const evaluateCode = async (req, res) => {
       input
     );
 
-    // ANALYSIS
-    const complexityData = analyzeComplexity(code, language);
-    const optimizationData = analyzeOptimization(code, language);
+    // ANALYZE COMPLEXITY
+
+    const complexityData =
+      analyzeComplexity(code, language);
 
     // EXECUTION DETAILS
 
     const executionTime =
-    parseFloat(result.time || 0);
+      parseFloat(result.time || 0);
 
     const memory =
-    parseFloat(result.memory || 0);
+      parseFloat(result.memory || 0);
 
-    // SCORE
+    // GENERATE SCORE
 
-    const scoreData = generateScore(
+    const scoreData =
+      generateScore(
 
-      complexityData,
+        complexityData,
 
-      optimizationData,
+        executionTime,
 
-      executionTime,
-
-      memory
-    );
-
-    // DEBUG LOGS
-
-    console.log(complexityData);
-
-    console.log(optimizationData);
-
-    console.log(scoreData);
+        memory
+      );
 
     // FINAL RESPONSE
 
     res.status(200).json({
 
-  stdout: result.stdout || "",
+      stdout:
+      result.stdout || "",
 
-  executionTime,
+      executionTime,
 
-  memory,
+      memory,
 
-  timeComplexity:
-  complexityData.timeComplexity,
+      timeComplexity:
+      complexityData.timeComplexity,
 
-  optimization:
-  optimizationData.optimization,
+      score:
+      scoreData.score,
 
-  score:
-  scoreData.score,
-
-  rating:
-  scoreData.rating
-});
+      rating:
+      scoreData.rating
+    });
 
   } catch(error){
 

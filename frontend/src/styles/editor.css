@@ -93,6 +93,146 @@
   background:#15803d;
 }
 
+/* SAVE BUTTON */
+
+.save-btn{
+  padding:10px 22px;
+
+  background:#7c3aed;
+
+  border:none;
+
+  color:white;
+
+  border-radius:6px;
+
+  cursor:pointer;
+
+  font-size:15px;
+
+  font-weight:600;
+}
+
+.save-btn:hover{
+  background:#6d28d9;
+}
+
+/* SAVE TO FOLDER MODAL */
+
+.save-modal-overlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.75);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+  backdrop-filter:blur(4px);
+}
+
+.save-modal{
+  background:#161b22;
+  border:1px solid #30363d;
+  border-radius:14px;
+  padding:35px 40px;
+  width:440px;
+  max-width:95vw;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+
+.save-modal h3{
+  color:#58a6ff;
+  font-size:22px;
+  margin:0 0 24px 0;
+}
+
+.save-modal label{
+  display:block;
+  color:#c9d1d9;
+  font-size:14px;
+  margin-bottom:8px;
+  margin-top:18px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+.save-modal-input,
+.save-modal-select{
+  width:100%;
+  padding:12px 16px;
+  background:#0d1117;
+  border:1px solid #30363d;
+  border-radius:8px;
+  color:white;
+  font-size:15px;
+  box-sizing:border-box;
+  transition:border-color 0.2s;
+}
+
+.save-modal-input:focus,
+.save-modal-select:focus{
+  outline:none;
+  border-color:#58a6ff;
+}
+
+.save-modal-empty{
+  padding:14px;
+  background:#0d1117;
+  border:1px dashed #30363d;
+  border-radius:8px;
+  color:#8b949e;
+  font-size:14px;
+}
+
+.save-modal-empty strong{
+  color:#58a6ff;
+}
+
+.save-modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:28px;
+}
+
+.save-modal-cancel{
+  padding:10px 22px;
+  background:transparent;
+  border:1px solid #30363d;
+  color:#c9d1d9;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.2s;
+}
+
+.save-modal-cancel:hover{
+  border-color:#8b949e;
+  color:white;
+}
+
+.save-modal-confirm{
+  padding:10px 22px;
+  background:#7c3aed;
+  border:none;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  transition:0.2s;
+}
+
+.save-modal-confirm:hover:not(:disabled){
+  background:#6d28d9;
+}
+
+.save-modal-confirm:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
 /* MAIN BODY */
 
 .main-body{
