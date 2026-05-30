@@ -1,4 +1,4 @@
-const analyzeComplexity = require("./backend/analyzers/complexityAnalyzer");
+const analyzeComplexity = require("../backend/analyzers/complexityAnalyzer");
 
 const pythonPermutations = `
 def permutations(arr, l, r):

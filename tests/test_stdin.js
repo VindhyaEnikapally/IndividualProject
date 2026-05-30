@@ -1,4 +1,4 @@
-const executeCode = require("./backend/services/judgeService");
+const executeCode = require("../backend/services/judgeService");
 
 const promptPolyfill = `
 const fs = require('fs');
