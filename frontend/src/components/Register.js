@@ -93,6 +93,11 @@ function Register() {
           Create Account
         </button>
 
+        <p>
+          Already have an account?{" "}
+          <span onClick={() => navigate("/login")}>Login</span>
+        </p>
+
       </div>
 
     </div>

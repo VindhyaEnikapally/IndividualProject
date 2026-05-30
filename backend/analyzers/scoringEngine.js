@@ -88,55 +88,47 @@ const generateScore = (
 
 ) => {
 
+  const complexity = complexityData.timeComplexity || "O(1)";
+
   let score = 100;
 
-  // TIME COMPLEXITY
-
-  if(complexityData.timeComplexity === "O(n)"){
-
-    score -= 10;
+  // Time Complexity specific base scores
+  if (complexity === "O(1)") {
+    score = 98;
+  } else if (complexity === "O(log n)") {
+    score = 93;
+  } else if (complexity === "O(√n)") {
+    score = 90;
+  } else if (complexity === "O(n)") {
+    score = 86;
+  } else if (complexity === "O(n log n)") {
+    score = 82;
+  } else if (complexity === "O(n²)") {
+    score = 68;
+  } else if (complexity === "O(n³)") {
+    score = 52;
+  } else if (complexity === "O(2ⁿ)") {
+    score = 42;
+  } else if (complexity === "O(n!)") {
+    score = 30;
+  } else {
+    score = 85;
   }
 
-  else if(
-    complexityData.timeComplexity === "O(n²)"
-  ){
+  // Dynamic deduction based on execution time
+  const timeDeduction = Math.min(10, Math.floor((executionTime || 0) * 50));
+  score -= timeDeduction;
 
-    score -= 30;
+  // Dynamic deduction based on memory usage (in KB)
+  const memoryDeduction = Math.min(15, Math.floor((memory || 0) * 0.0005));
+  score -= memoryDeduction;
+
+  // Limit bounds
+  if(score > 100){
+    score = 100;
   }
-
-  else if(
-    complexityData.timeComplexity === "O(n³)"
-  ){
-
-    score -= 50;
-  }
-
-  else if(
-    complexityData.timeComplexity === "O(2ⁿ)"
-  ){
-
-    score -= 40;
-  }
-
-  // MEMORY
-
-  if(memory > 15000){
-
-    score -= 10;
-  }
-
-  // EXECUTION TIME
-
-  if(executionTime > 1){
-
-    score -= 10;
-  }
-
-  // LIMIT
-
-  if(score < 20){
-
-    score = 20;
+  if(score < 10){
+    score = 10;
   }
 
   // RATING

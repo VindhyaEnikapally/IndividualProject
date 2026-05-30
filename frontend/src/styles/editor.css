@@ -1,5 +1,5 @@
 .main-container{
-  height:100vh;
+  height:calc(100vh - 70px);
   background:#0f172a;
   color:white;
   display:flex;
@@ -307,12 +307,18 @@
 
   padding:15px;
 
-  overflow:auto;
+  box-sizing:border-box;
+
+  display:flex;
+
+  flex-direction:column;
+
+  overflow:hidden;
 }
 
 .input-box h3,
 .error-box h3{
-  margin-top:0;
+  margin:0 0 10px 0;
   color:#58a6ff;
 }
 
@@ -321,7 +327,7 @@
 .input-box textarea{
   width:100%;
 
-  height:85%;
+  flex:1;
 
   background:#020617;
 
@@ -335,15 +341,32 @@
 
   resize:none;
 
-  margin-top:10px;
+  box-sizing:border-box;
+
+  font-family:inherit;
+
+  font-size:14px;
+}
+
+.input-box textarea:focus{
+  outline:none;
+  border-color:#58a6ff;
 }
 
 /* ERROR TEXT */
 
 .error-box pre{
+  margin:0;
+
+  flex:1;
+
   color:#f87171;
 
   white-space:pre-wrap;
 
   word-wrap:break-word;
+
+  overflow:auto;
+
+  font-size:14px;
 }

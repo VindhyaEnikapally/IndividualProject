@@ -84,6 +84,11 @@ function Login() {
                     Login
                 </button>
 
+                <p>
+                    Don't have an account?{" "}
+                    <span onClick={() => navigate("/register")}>Register</span>
+                </p>
+
             </div>
 
         </div>

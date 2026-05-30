@@ -29,8 +29,33 @@ const executeCode = async (
     }
 
     // BASE64 ENCODING
-    const base64SourceCode = Buffer.from(sourceCode || "").toString("base64");
-    const base64Stdin = Buffer.from(stdin || "").toString("base64");
+    let finalSourceCode = sourceCode || "";
+    if (language === "javascript") {
+      const promptPolyfill = `const fs = require('fs');
+let __stdin_data = "";
+let __stdin_lines = [];
+let __stdin_index = 0;
+function prompt(message) {
+  if (!__stdin_data) {
+    try {
+      __stdin_data = fs.readFileSync(0, 'utf-8') || "";
+      __stdin_lines = __stdin_data.split(/\\r?\\n/);
+    } catch (e) {
+      __stdin_lines = [];
+    }
+  }
+  if (__stdin_index < __stdin_lines.length) {
+    return __stdin_lines[__stdin_index++];
+  }
+  return null;
+}
+`;
+      finalSourceCode = promptPolyfill + "\n" + finalSourceCode;
+    }
+
+    const normalizedStdin = (stdin || "").replace(/\r\n/g, "\n");
+    const base64SourceCode = Buffer.from(finalSourceCode).toString("base64");
+    const base64Stdin = Buffer.from(normalizedStdin).toString("base64");
 
     // SEND CODE TO JUDGE0
 
