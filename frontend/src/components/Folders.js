@@ -14,24 +14,13 @@ const Folders = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
-  const authHeader = { headers: { Authorization: `Bearer ${token}` } };
+const authHeader = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
 
-  // Fetch Folders
-  const fetchFolders = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      const response = await axios.get(`${API_URL}/api/folders`, authHeader);
-      setFolders(response.data);
-    } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || "Failed to load folders. Please log in.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
+ useEffect(() => {
   const loadFolders = async () => {
     if (!token) {
       setError("Please log in to manage your folders.");
@@ -45,7 +34,11 @@ const Folders = () => {
 
       const response = await axios.get(
         `${API_URL}/api/folders`,
-        authHeader
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       );
 
       setFolders(response.data);
