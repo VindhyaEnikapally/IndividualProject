@@ -32,13 +32,36 @@ const Folders = () => {
   };
 
   useEffect(() => {
+  const loadFolders = async () => {
     if (!token) {
       setError("Please log in to manage your folders.");
       setLoading(false);
       return;
     }
-    fetchFolders();
-  }, []);
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.get(
+        `${API_URL}/api/folders`,
+        authHeader
+      );
+
+      setFolders(response.data);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err.response?.data?.message ||
+        "Failed to load folders. Please log in."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadFolders();
+}, [token]);
 
   // Create Folder
   const handleCreateFolder = async (e) => {
