@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/Folders.css";
+import API_URL from "../config";
 
 const Folders = () => {
   const [folders, setFolders] = useState([]);
@@ -20,7 +21,7 @@ const Folders = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await axios.get("http://localhost:5000/api/folders", authHeader);
+      const response = await axios.get(`${API_URL}/api/folders`, authHeader);
       setFolders(response.data);
     } catch (err) {
       console.error(err);
@@ -45,7 +46,7 @@ const Folders = () => {
     if (!newFolderName.trim()) return;
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/folders",
+        `${API_URL}/api/folders`,
         { name: newFolderName.trim() },
         authHeader
       );
@@ -62,7 +63,7 @@ const Folders = () => {
     e.stopPropagation();
     if (!window.confirm("Delete this folder and all saved codes inside it?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/folders/${folderId}`, authHeader);
+      await axios.delete(`${API_URL}/api/folders/${folderId}`, authHeader);
       setFolders(folders.filter(f => f._id !== folderId));
       if (expandedFolderId === folderId) setExpandedFolderId(null);
     } catch (err) {
@@ -80,7 +81,7 @@ const Folders = () => {
     setExpandedFolderId(folderId);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/codes/${folderId}`,
+        `${API_URL}/api/codes/${folderId}`,
         authHeader
       );
       setFolderCodes(prev => ({ ...prev, [folderId]: response.data }));
@@ -95,7 +96,7 @@ const Folders = () => {
     e.stopPropagation();
     if (!window.confirm("Delete this saved code?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/codes/${codeId}`, authHeader);
+      await axios.delete(`${API_URL}/api/codes/${codeId}`, authHeader);
       setFolderCodes(prev => ({
         ...prev,
         [folderId]: prev[folderId].filter(c => c._id !== codeId)
